@@ -34,6 +34,7 @@ sub run {
         'user=s'     => \$self->{user},
         'password=s' => \$self->{password},
         'channel=s'  => \$self->{channel},
+        'notice'     => \$self->{notice},
         'v|verbose'  => \$self->{verbose},
         'h|help'     => \$self->{help},
     );
@@ -97,7 +98,11 @@ sub handle {
                 my ($hdl) = @_;
                 $hdl->push_read(line => sub {
                     my ($hdl, $line) = @_;
-                    $con->send_chan($self->{channel}, 'NOTICE', $self->{channel}, $line);
+                    if ($self->{notice}) {
+                        $con->send_chan($self->{channel}, 'NOTICE', $self->{channel}, $line);
+                    } else {
+                        $con->send_chan($self->{channel}, 'PRIVMSG', $self->{channel}, $line);
+                    }
                 });
             });
         }
