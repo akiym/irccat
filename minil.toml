@@ -1,0 +1,6 @@
+name = "App-irccat"
+# badges = ["travis"]
+authority="cpan:AKIYM"
+
+module_maker="ModuleBuildTiny"
+

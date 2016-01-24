@@ -1,0 +1,6 @@
+#!perl
+use strict;
+use warnings;
+use App::irccat;
+
+exit(App::irccat->new->run(@ARGV));
